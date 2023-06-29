@@ -3,11 +3,13 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh "sed -i 's/3.8.6/3.6.3/g' pom.xml"
                 sh 'mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
+                sh "sed -i 's/3.8.6/3.6.3/g' pom.xml"
                 sh 'mvn test'
             }
             post {
@@ -18,6 +20,7 @@ pipeline {
         }
         stage('Deliver') {
             steps {
+                sh "sed -i 's/3.8.6/3.6.3/g' pom.xml"
                 sh './jenkins/scripts/deliver.sh'
             }
         }
